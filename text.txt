@@ -1,0 +1,260 @@
+SELECT * 
+2 FROM employees; 
+3 -- *은 모든 열 모든 데이터를 조회 
+4 -- 명령어는 대문자 나머지는 소문자로 작성 권장 
+5 
+ 
+6 SELECT employee_id, first_name, last_name 
+7 FROM employees; 
+8 -- select 뒤의 열들만 조회 
+9 -- 명령어는 대문자 나머지는 소문자로 작성 권장 
+10 
+ 
+11 SELECT employee_id, first_name, last_name 
+12 FROM employees 
+13 ORDER BY employee_id DESC; 
+14 -- select 뒤의 열들만 조회 
+15 -- employee_id를 기준으로 내림차순DESC 정렬 
+16 
+ 
+17 SELECT DISTINCT job_id 
+18 FROM employees 
+19 -- job_id를 기준으로 고유한 값들만  
+20 -- 즉, 중복 제거된 결과 
+21 
+ 
+22 SELECT employee_id AS 사원번호, first_name AS 이름, last_name AS 성 
+23 FROM employees; 
+24 -- AS를 사용하여 열이름을 변경하여 출력한다. 
+25 
+ 
+26 SELECT employee_id, first_name || last_name 
+27 FROM employees; 
+28 -- 두 개열을 붙여서 하나의 데이터 값으로 나타낸다. 
+29 
+ 
+30 SELECT employee_id,  
+31         first_name || ' ' || last_name, 
+32         email||'@'||'company.com' 
+33 FROM employees; 
+34 -- 두 개열을 붙여서 하나의 데이터 값으로 나타낸다.  
+35 -- 가운데 한칸 띄기  
+36 
+ 
+37 SELECT employee_id AS 사원번호,  
+38         salary AS 급여,  
+39         salary+500 AS 추가급여,  
+40         salary-100 AS 인하급여, 
+41         (salary * 1.1)/2 AS 조정급여 
+42 FROM employees; 
+43 -- 열이름을 별명으로 잠시 보여줄때만 사용된다.  
+44 
+ 
+45 SELECT * 
+46 FROM employees 
+47 WHERE employee_id = 100; 
+48 -- 아이디가 100 인 사람의 정보만 출력 
+49 
+ 
+50 SELECT * 
+51 FROM employees 
+52 WHERE first_name = 'David'; 
+53 -- first_name 에서 David만 출력 
+54 
+ 
+55 
+ 
+56 
+ 
+57 SELECT * 
+58 FROM employees 
+59 WHERE salary BETWEEN 10000 AND 20000; 
+60 
+ 
+61 -- BETWEEN a AND b a와 b사이의 수 >=   <= 
+62 
+ 
+63 
+ 
+64 
+ 
+65 SELECT * 
+66 FROM employees 
+67 WHERE salary IN(1000,17000,24000); 
+68 
+ 
+69 -- IN =와 유사하지만 =은 하나만 조건으로 지정하고  
+70 -- IN 은 값을 여러개 설정 
+71 
+ 
+72 
+ 
+73 SELECT * 
+74 FROM employees 
+75 WHERE job_id LIKE 'AD%'; 
+76 
+ 
+77 -- LIKE는 명확하지 않은 조건으로 찾을때 
+78 -- ~처럼 ~같은  
+79 -- 조건에는 문자나 숫자를 포함할 수 있다.  
+80 -- % 모든 문자   _ 한글자 라는 의미이다.  
+81 
+ 
+82 
+ 
+83 SELECT * 
+84 FROM employees 
+85 WHERE manager_id IS NULL; 
+86 
+ 
+87 -- 데이터 값이 null 인 경우를 조회 
+88 -- 0 이나 공백이 아닌 아무것도 없는 값이 null 
+89 
+ 
+90 
+ 
+91 SELECT * 
+92 FROM employees 
+93 WHERE salary > 4000 
+94 AND job_id = 'IT_PROG'; 
+95 
+ 
+96 -- 조건을 모두 충족하는 데이터를 검색 
+97 -- AND를 계속 붙여 추가할 수 있다.  
+98 
+ 
+99 
+ 
+100 
+ 
+101 SELECT * 
+102 FROM employees 
+103 WHERE salary > 4000 
+104 AND job_id = 'IT_PROG' 
+105 OR job_id = 'FI_ACCOUNT'; 
+106 
+ 
+107 -- 조건을 모두 충족하는 데이터를 검색 
+108 -- AND나 OR 를 계속 붙여 추가할 수 있다.  
+109 
+ 
+110 
+ 
+111 
+ 
+112 SELECT * 
+113 FROM employees 
+114 WHERE employee_id <> 105; 
+115 
+ 
+116 -- <>아니다. != 
+117 
+ 
+118 
+ 
+119 
+ 
+120 
+ 
+121 
+ 
+122 
+ 
+123 
+ 
+124 SELECT * 
+125 FROM employees 
+126 WHERE manager_id IS NOT NULL; 
+127 
+ 
+128 -- IS NULL <> IS NOT NULL 
+129 
+ 
+130 
+ 
+131 
+ 
+132 SELECT last_name, 
+133         LOWER(last_name) LOWER적용, 
+134         UPPER(last_name) UPPER적용, 
+135         email, 
+136         INITCAP(email) INITCAP적용 
+137 FROM employees; 
+138 
+ 
+139 
+ 
+140 -- employee 테이블에서 last_name을 소문자와 대문자로 출력 
+141 -- email은 첫 글자만 대문자로 출력 
+142 
+ 
+143 
+ 
+144 
+ 
+145 SELECT job_id, 
+146         SUBSTR(job_id,1,2) 
+147 FROM employees; 
+148 
+ 
+149 
+ 
+150 -- employee 테이블에서 job_id값의 첫 자리부터 두개 문자 출력 
+151 
+ 
+152 
+ 
+153 
+ 
+154 SELECT job_id, 
+155         REPLACE(job_id,'ACCOUNT','ACCNT') 적용결과 
+156 FROM employees; 
+157 
+ 
+158 
+ 
+159 -- employee 테이블에서 job_id값에서 찾아서 바꾼다.  
+160 
+ 
+161 
+ 
+162 
+ 
+163 SELECT first_name, 
+164         LPAD(first_name, 12, ' ') 적용결과 
+165 FROM employees; 
+166 
+ 
+167 
+ 
+168 -- employee 테이블에서 first_name 값에서 12자리로 만들고 나머지를 
+169 -- 어떤 문자로 채운다. (* 또는 ' ') 
+170 
+ 
+171 
+ 
+172 
+ 
+173 SELECT job_id, 
+174         LTRIM(job_id,'F') LTRIM적용결과, 
+175         RTRIM(job_id,'T') RTRIM적용결과        
+176 FROM employees; 
+177 
+ 
+178 
+ 
+179 -- 글자를 만나면 삭제.. 
+180 
+ 
+181 
+ 
+182 
+ 
+183 SELECT TRIM('     Big Data     ') 
+184 FROM dual; 
+185 
+ 
+186 -- 앞 뒤 여백 강제 제거 
+
+
+
