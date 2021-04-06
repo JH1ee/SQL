@@ -257,4 +257,41 @@ SELECT *
 186 -- 앞 뒤 여백 강제 제거 
 
 
+ SELECT salary,
+        salary/30 월급,
+        Round(salary/30,0) 적용결과0,
+        Round(salary/30,1) 적용결과1,
+        Round(salary/30,-1) 적용결과MINUS1
+ FROM employees; --명령어는 대문자로 권장
+
+-- 날짜 계산하기 
+SELECT TO_CHAR(SYSDATE, 'YY/MM/DD/HH24:MI') 오늘날짜,
+        SYSDATE + 1 더하기1,
+        SYSDATE - 1 빼기1,
+        TO_DATE('20171202') - TO_DATE('20171201') 날짜빼기, 
+        SYSDATE + 13/24 시간더하기
+FROM   DUAL;
+
+
+
+SELECT hire_date,
+
+       ADD_MONTHS(hire_date, 3) 더하기_적용결과,
+
+       ADD_MONTHS(hire_date, -3) 빼기_적용결과
+
+FROM   employees
+
+WHERE  employee_id BETWEEN 100 AND 106;
+SELECT employee_id, first_name, last_name, salary,
+    CASE
+        WHEN salary >= 9000 THEN ‘상위급여’
+        WHEN salary BETWEEN 6000 AND 8999 THEN ‘중위급여’
+        ELSE ‘하위급여’
+    END AS 급여등급
+FROM  employees
+WHERE job_id = ‘IT_PROG’;
+
+
+
 
